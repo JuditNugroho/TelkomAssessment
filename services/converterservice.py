@@ -54,7 +54,7 @@ class ConverterService:
             self.output_dir = data.get('value')
         elif data.get('key') == FlagVar.HELP_COMMAND.value:
             self.show_help()
-            return
+            return False
 
         commands.pop(0)
         return self.check_conversion(commands)
@@ -86,7 +86,6 @@ class ConverterService:
         elif self.type_file == TypeFileVar.TEXT_VAR.value:
             result = BaseConverterController(repo=TextConverterService).start(rows)
 
-        os.umask(0)
         with self.safe_open_file(self.output_dir) as outfile:
             outfile.write(result)
         return True

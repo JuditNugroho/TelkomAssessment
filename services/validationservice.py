@@ -6,6 +6,7 @@ class ValidationService:
     commands = []
 
     def start_validation(self, user_input):
+        self.commands.clear()
         status = self.check_tools_is_valid(user_input)
         if not status:
             return False
